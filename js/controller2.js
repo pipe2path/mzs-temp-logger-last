@@ -12,12 +12,13 @@ app.controller('DashboardCtrl', ['$scope', '$timeout', '$http', '$q', '$filter',
                 var currC = data.response[0].readingCelsius;
                 var currF = ((9/5 * parseFloat(currC)) + 32).toFixed(2);
 
-                var d = data.response[0].dateTimeStamp + " UTC" ;
-                var d1 = new Date(d).toLocaleString();
-                                
+                var d = data.response[0].dateTimeStamp + " UTC";
+                var d1  = d.replace(/-/g,'/');
+                var d2 = new Date(d1).toLocaleString();
+                                                                
                 $scope.CurrentTempInC = currC;
                 $scope.CurrentTempInF = currF;
-                $scope.LastRecorded = d1;
+                $scope.LastRecorded = d2;
 
                 $scope.TempList = data;
                 $timeout(pollData, 1000);
