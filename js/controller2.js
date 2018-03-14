@@ -12,13 +12,12 @@ app.controller('DashboardCtrl', ['$scope', '$timeout', '$http', '$q', '$filter',
                 var currC = data.response[0].readingCelsius;
                 var currF = ((9/5 * parseFloat(currC)) + 32).toFixed(2);
 
-                var d = new Date();
-                var n = d.toLocaleDateString();
-                var t = d.toLocaleTimeString();
-
+                var d = data.response[0].dateTimeStamp + " UTC" ;
+                var d1 = new Date(d).toLocaleString();
+                                
                 $scope.CurrentTempInC = currC;
                 $scope.CurrentTempInF = currF;
-                $scope.LastRecorded = n + " " + t;
+                $scope.LastRecorded = d1;
 
                 $scope.TempList = data;
                 $timeout(pollData, 1000);
@@ -29,6 +28,17 @@ app.controller('DashboardCtrl', ['$scope', '$timeout', '$http', '$q', '$filter',
             pollData();
         }
     }]);
+
+function convertUTCDateToLocalDate(date) {
+    var newDate = new Date(date.getTime()+date.getTimezoneOffset()*60*1000);
+
+    var offset = date.getTimezoneOffset() / 60;
+    var hours = date.getHours();
+
+    newDate.setHours(hours - offset);
+
+    return newDate;   
+}
 
 app.factory('DashboardStats', ['$http', '$timeout', function($http, $timeout) {
     $http.defaults.headers.post["Content-Type"] = "application/json";
