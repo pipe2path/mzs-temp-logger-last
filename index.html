@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="en" ng-app="tempLogger">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="icon" href="../../favicon.ico">
+
+	<title>Freezer Temperature</title>
+
+	<!-- Bootstrap core CSS -->
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/flipclock.css" rel="stylesheet">
+
+
+	<!-- Custom styles for this template -->
+	<link href="css/jumbotron-narrow.css" rel="stylesheet">
+
+</head>
+
+<style>
+	.headerlbl { color: white}
+	.jumbotron { background-color: grey;padding-bottom: 10px}
+	.jumbotron label{color: #5bc0de; font-size: 44px; }
+	.panel label{ color: #31b0d5; font-size: 32px;}
+	.footer {
+		position: absolute;
+		bottom: 0;
+		width: 95%;
+		/* Set the fixed height of the footer here */
+		height: 20px;
+		background-color: #f5f5f5;
+	}
+</style>
+
+<body style="background-color: black">
+
+	<div ng-controller="DashboardCtrl">
+		<div class="container">
+			<h1 class="text-center header headerlbl">FREEZER TEMPERATURE</h1>
+			<div class="jumbotron">
+				<div class="text-center">
+					<label style="color: blue">{{CurrentTempInC}} C</label>
+				</div>
+				<div class="text-center">
+					<label style="color: blue">{{CurrentTempInF}} F</label>
+				</div>
+			</div>
+
+			<div class="input-group center-block">
+				<button class="btn btn-primary btn-lg btn-block" ng-click="refreshData()">Refresh</button>
+			</div>
+
+			<br/>
+			<br/>
+
+			<div class="text-center" style="color:white;font-size:24px">
+					<p>{{LastRecorded}}<p>
+				</div>
+			<div class="col-md-6">
+				
+			</div>
+			<span us-spinner spinner-on="showSpinner"></span>
+			<footer class="footer">
+			<p>Menezes Family &copy; 2018</p>
+			</footer>
+
+		</div> <!-- /container -->
+	</div> <!-- ng-controller -->
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	<script src="js/controller2.js"></script>
+	<script src="bower_components/angular-spinner/dist/angular-spinner.min.js"></script>
+	<!--<script src="js/bootstrap.min.js"></script>-->
+
+</body>
+</html>
