@@ -11,7 +11,8 @@ app.controller('DashboardCtrl', ['$scope', '$timeout', '$http', '$q', '$filter',
             DashboardStats.poll().then(function(data) {
                 var currC = data.response[0].readingCelsius;
                 var currF = ((9/5 * parseFloat(currC)) + 32).toFixed(2);
-
+				var voltage = data.response[0].voltage;
+				
                 var d = data.response[0].dateTimeStamp + " UTC";
                 var d1  = d.replace(/-/g,'/');
                 var d2 = new Date(d1).toLocaleString();
@@ -19,6 +20,7 @@ app.controller('DashboardCtrl', ['$scope', '$timeout', '$http', '$q', '$filter',
                 $scope.CurrentTempInC = currC;
                 $scope.CurrentTempInF = currF;
                 $scope.LastRecorded = d2;
+				$scope.voltage = voltage;
 
                 $scope.TempList = data;
                 $timeout(pollData, 1000);
