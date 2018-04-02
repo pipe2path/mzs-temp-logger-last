@@ -2,7 +2,7 @@
   <name>Temperature Log</name>
   <description>Displays latest Temperature</description>
   <author href="http://pipe2path.com" email="support@pipe2path.com"></author>
-  <content src="index.htm"/>
+  <content src="index.html"/>
   <preference name="DisallowOverscroll" value="true"/>
   <preference name="android-minSdkVersion" value="14"/>
   <plugin name="cordova-plugin-battery-status" source="npm" spec="~1.1.1"/>
