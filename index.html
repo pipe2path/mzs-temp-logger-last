@@ -19,6 +19,9 @@
 
 	<!-- Custom styles for this template -->
 	<link href="css/jumbotron-narrow.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/select.css">
+
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.20.0/select.css" rel="stylesheet">
 
 </head>
 
@@ -41,7 +44,17 @@
 
 	<div ng-controller="DashboardCtrl">
 		<div class="container">
-			<h1 class="text-center header headerlbl">FREEZER TEMPERATURE</h1>
+			<h1 class="text-center headerlbl">FREEZER</h1>
+			<div class="text-center header headerlbl">
+				<ui-select ng-model="selectedEntity">
+				    <ui-select-match>
+				        <span ng-bind="$select.selected.name"></span>
+				    </ui-select-match>
+				    <ui-select-choices repeat="item in (entities | filter: $select.search) track by item.id">
+				        <span ng-bind="item.name"></span>
+				    </ui-select-choices>
+				</ui-select>
+			</div>
 			<div class="jumbotron">
 				<div class="text-center">
 					<label style="color: blue">{{CurrentTempInC}} C</label>
@@ -79,7 +92,9 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 	<script src="js/controller2.js"></script>
 	<script src="bower_components/angular-spinner/dist/angular-spinner.min.js"></script>
-	<!--<script src="js/bootstrap.min.js"></script>-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.20.0/select.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-sanitize.js"></script>
+  	<!--<script src="js/bootstrap.min.js"></script>-->
 
 </body>
 </html>
