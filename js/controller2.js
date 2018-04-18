@@ -15,10 +15,10 @@ app.controller('DashboardCtrl', ['$scope', '$timeout', '$http', '$q', '$filter',
         
         $scope.tempReadings = {"entityId": "", "readingCelsius": "", "dateTimeStamp": ""};
 
-        pollData();
+        pollData({id: "1", name:""});
 
-        function pollData() {
-            DashboardStats.poll().then(function(data) {
+        function pollData(entity) {
+            DashboardStats.poll(entity).then(function(data) {
                 var currC = data.response[0].readingCelsius;
                 var currF = ((9/5 * parseFloat(currC)) + 32).toFixed(2);
 				var voltage = data.response[0].voltage;
@@ -33,16 +33,18 @@ app.controller('DashboardCtrl', ['$scope', '$timeout', '$http', '$q', '$filter',
 				$scope.voltage = voltage;
 
                 $scope.TempList = data;
-                $timeout(pollData, 1000);
+                $timeout(pollData($scope.selectedEntity), 1000);
             });
         }
 
         $scope.refreshData = function(){
-            pollData();
+            pollData($scope.selectedEntity);
         }
 
-        $scope.onSelected = function(selectedItem){
-            console.log("item selected");
+        // on select of a new entity in the dropdown
+        $scope.onSelected = function(entity){
+            $scope.selectedEntity = entity;
+            pollData(entity);
         }
     }]);
    
@@ -63,8 +65,8 @@ app.controller('DashboardCtrl', ['$scope', '$timeout', '$http', '$q', '$filter',
 
         var data = { response: { }, calls: 0 };
 
-        var poller = function () {
-            var url = 'https://mzs-tmp-logger-service.herokuapp.com/temperature'
+        var poller = function (entity) {
+            var url = 'https://mzs-tmp-logger-service.herokuapp.com/temperature/id/' + entity.id;
             return $http.get(url).then(function (responseData) {
                 data.calls++;
                 data.response = responseData.data;
