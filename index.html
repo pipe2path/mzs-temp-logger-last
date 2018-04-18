@@ -46,7 +46,7 @@
 		<div class="container">
 			<h1 class="text-center headerlbl">FREEZER</h1>
 			<div class="text-center header headerlbl">
-				<ui-select ng-model="selectedEntity">
+				<ui-select ng-model="selectedEntity" on-select="onSelected($item)">
 				    <ui-select-match>
 				        <span ng-bind="$select.selected.name"></span>
 				    </ui-select-match>
