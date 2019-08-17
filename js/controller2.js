@@ -15,7 +15,7 @@ app.controller('DashboardCtrl', ['$scope', '$timeout', '$http', '$q', '$filter',
         
         $scope.tempReadings = {"entityId": "", "readingCelsius": "", "dateTimeStamp": ""};
 
-        pollData({id: "1", name:""});
+        pollData({id: 1, name:""});
 
         function pollData(entity) {
             DashboardStats.poll(entity).then(function(data) {
