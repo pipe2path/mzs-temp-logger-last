@@ -1,4 +1,4 @@
-var app = angular.module('tempLogger', ['angularSpinner', 'ngSanitize', 'ui.select']);
+var app = angular.module('tempLogger', ['angularSpinner', 'ui.select']);
 
 app.controller('DashboardCtrl', ['$scope', '$timeout', '$http', '$q', '$filter', 'DashboardStats', 
     function($scope, $timeout, $http, $q, $filter, DashboardStats) {
